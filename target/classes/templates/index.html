@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Project</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+
+</head>
+
+<body class="pg">
+<div class="page" id="app">
+    <div id="mallPage" class=" mallist tmall- page-not-market ">
+
+        <!-- 头部搜索 -->
+        <div id="header" class=" header-list-app">
+            <div class="headerLayout">
+                <div class="headerCon ">
+
+
+                    <div class="header-extra">
+
+                        <!--搜索-->
+                        <div id="mallSearch" class="mall-search">
+                            <form name="searchTop" class="mallSearch-form clearfix">
+                                <fieldset>
+                                    <legend>search</legend>
+                                    <div class="mallSearch-input clearfix">
+                                        <div class="s-combobox" id="s-combobox-685">
+                                            <div class="s-combobox-input-wrap">
+                                                <input v-model="keyword" type="text" autocomplete="off" value="dd"
+                                                       id="mq"
+                                                       class="s-combobox-input" aria-haspopup="true">
+                                            </div>
+                                        </div>
+                                        <button type="submit" @click.prevent="searchKey" id="searchbtn">Search</button>
+                                    </div>
+
+                                </fieldset>
+                            </form>
+
+                            <div>
+                                <select id="select">
+                                    <option value="lucene">Lucene</option>
+                                    <option value="hadoop">Hadoop</option>
+                                </select>
+                            </div>
+
+                            <ul class="relKeyTop">
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 商品详情页面 -->
+        <div id="content">
+            <div class="main">
+                <!-- 品牌分类 -->
+                <form class="navAttrsForm">
+                    <div class="attrs j_NavAttrs" style="display:block">
+                        <div class="brandAttr j_nav_brand">
+                            <div class="j_Brand attr">
+                                <div class="attrKey">
+                                    type
+                                </div>
+                                <div class="attrValues">
+                                    <ul class="av-collapse row-2">
+                                        <li><a href="#"></a></li>
+                                        <li><a href="#"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+
+                <!-- 商品详情 -->
+                <div class="view grid-nosku">
+
+                    <div class="product" v-for="result in results">
+                        <div class="product-iWrap">
+                            <!--商品封面-->
+                            <div class="productImg-wrap">
+                                <a class="productImg">
+                                    <img :src="result.src">
+                                </a>
+                            </div>
+                            </p>
+                            <!--标题-->
+                            <p class="productTitle">
+                                <a v-html="result.name"> </a>
+                            </p>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--前段使用vue，实现前后端分离-->
+<script th:src="@{/js/axios.min.js}"></script>
+<script th:src="@{/js/vue.min.js}"></script>
+<script>
+    function readSelect(){
+        var myselect = document.getElementById("select");
+        var index=myselect.selectedIndex;
+        var value = myselect.options[index].value;
+        return value;
+    }
+    new Vue({
+        el: '#app',
+        data: {
+            keyword: '',//搜索的关键字
+            results: []//搜索的结果
+        },
+        methods: {
+
+            searchKey() {
+                // var myselect = document.getElementById("select");
+                // var index=myselect.selectedIndex;
+                // var value = myselect.options[index].value;
+
+                var keyword = this.keyword;
+                console.log(keyword);
+                //对接后端接口
+                if(readSelect() == "lucene"){
+                    axios.get('search/'+keyword+'/1/100').then(response=>{
+                        console.log(response.data);
+                        this.results=response.data;//绑定数据
+                    })
+                }else{
+                    axios.get('hadoop/'+keyword).then(response=>{
+                        console.log(response.data);
+                        this.results=response.data;//绑定数据
+                    })
+                }
+                // axios.get('search/'+keyword+'/1/100').then(response=>{
+                //     console.log(response.data);
+                //     this.results=response.data;//绑定数据
+                // })
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

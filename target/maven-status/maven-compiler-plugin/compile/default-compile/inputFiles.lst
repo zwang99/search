@@ -1,0 +1,8 @@
+/Users/alexpanpch/IdeaProjects/elastic/src/main/java/com/hao/elastic/util/readFile.java
+/Users/alexpanpch/IdeaProjects/elastic/src/main/java/com/hao/elastic/util/ImageParseUtil.java
+/Users/alexpanpch/IdeaProjects/elastic/src/main/java/com/hao/elastic/config/ElasticSearchClientConfig.java
+/Users/alexpanpch/IdeaProjects/elastic/src/main/java/com/hao/elastic/service/ContentService.java
+/Users/alexpanpch/IdeaProjects/elastic/src/main/java/com/hao/elastic/pojo/Content.java
+/Users/alexpanpch/IdeaProjects/elastic/src/main/java/com/hao/elastic/controller/ContentController.java
+/Users/alexpanpch/IdeaProjects/elastic/src/main/java/com/hao/elastic/ElasticApplication.java
+/Users/alexpanpch/IdeaProjects/elastic/src/main/java/com/hao/elastic/controller/IndexController.java
